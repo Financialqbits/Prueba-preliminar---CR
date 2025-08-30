@@ -50,53 +50,14 @@
     </style>
 
 <style>
-img {
-  image-rendering: auto;
-  object-fit: contain;
-  max-width: 100%;
-  height: auto !important;
-}
-</style>
+img[src*=".png"][src*="img-"]:not([src*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) { display:none !important; }
+[style*="background-image"][style*="img-"]:not([style*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) { display:none !important; }
+picture source[srcset*="img-"]:not([srcset*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) { display:none !important; }
 
+img[src*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"] { transform:none !important; image-rendering:auto !important; }
 
-<style>
-/* Force all quiz images to preserve aspect ratio */
-img {
-  width: auto !important;
-  height: auto !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  object-fit: contain !important;
-}
-
-/* Target iSpring container image wrappers */
-.ispring-content img,
-.ispring-slide img {
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-}
-</style>
-
-
-<style>
-/* Keep ONLY the chosen statement image; hide all other PNG layers */
-img[src*=".png"][src*="img-"]:not([src*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) {
-  display: none !important;
-}
-[style*="background-image"][style*="img-"]:not([style*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) {
-  display: none !important;
-}
-picture source[srcset*="img-"]:not([srcset*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) {
-  display: none !important;
-}
-
-/* Try to neutralize transforms that could cause subpixel doubling */
-img[src*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"] {
-  transform: none !important;
-  image-rendering: auto !important;
-  -ms-interpolation-mode: bicubic;
-}
+.ispring-content canvas, .ispring-slide canvas, 
+.ispring-content svg, .ispring-slide svg { display:none !important; }
 </style>
 
 </head>
@@ -117,35 +78,48 @@ img[src*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"] {
 	</script>
 
 <script>
-// After everything loads, keep only one copy of the keeper image even if it appears multiple times.
-window.addEventListener('load', () => {
-  const KEEP = 'img-f7756609d2f7c73025a4396d9c8017b570214bb9.png';
-
-  // Hide all non-keeper <img> layers
-  document.querySelectorAll('img[src*="img-"]').forEach(img => {
-    const s = img.getAttribute('src') || '';
-    if (!s.includes(KEEP)) img.style.display = 'none';
-  });
-
-  // If multiple keeper images exist, hide duplicates and keep only the first
-  const keepers = Array.from(document.querySelectorAll(`img[src*="${KEEP}"]`));
-  keepers.slice(1).forEach(el => el.style.display = 'none');
-
-  // Hide any background-image layers that aren't the keeper
-  const els = Array.from(document.querySelectorAll('[style*="background-image"]'));
-  let keeperBgKept = false;
-  els.forEach(el => {
-    const styleAttr = el.getAttribute('style') || '';
-    const comp = getComputedStyle(el).backgroundImage || '';
-    const bg = styleAttr + ' ' + comp;
-    if (bg.includes('img-') && !bg.includes(KEEP)) {
-      el.style.display = 'none';
-    } else if (bg.includes(KEEP)) {
-      if (keeperBgKept) el.style.display = 'none';
-      keeperBgKept = true;
-    }
-  });
-});
+(function(){ 
+  const KEEP="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png";
+  function rect(o){ try{return o.getBoundingClientRect()}catch(e){return null} }
+  function overlaps(a,b){
+    if(!a||!b) return false;
+    const x = Math.max(0, Math.min(a.right,b.right) - Math.max(a.left,b.left));
+    const y = Math.max(0, Math.min(a.bottom,b.bottom) - Math.max(a.top,b.top));
+    return (x*y) > 0.05 * (Math.min(a.width*b.height, b.width*a.height) || 1);
+  }
+  function isUI(el){
+    const tag = el.tagName.toLowerCase();
+    if (/(select|button|input|label)/.test(tag)) return true;
+    if (el.getAttribute('role') === 'button') return true;
+    return false;
+  }
+  function clean(){
+    const keepers = Array.from(document.querySelectorAll('img[src*="'+KEEP+'"]'));
+    if(!keepers.length) return;
+    keepers.slice(1).forEach(k => k.style.display='none');
+    const keep = keepers[0];
+    const kr = rect(keep);
+    document.querySelectorAll('img[src*="img-"]').forEach(function(img){
+      const s = img.getAttribute('src') || '';
+      if (s.indexOf(KEEP) === -1) img.style.display='none';
+    });
+    const all = Array.from(document.querySelectorAll('body *'));
+    all.forEach(function(el){
+      if (el===keep) return;
+      if (isUI(el)) return;
+      if (el.contains(keep) || keep.contains(el)) return;
+      const r = rect(el);
+      if (r && overlaps(kr, r)) {
+        const area = r.width * r.height;
+        if (area > (window.innerWidth*window.innerHeight*0.5)) return;
+        el.style.display='none';
+      }
+    });
+  }
+  window.addEventListener('load', clean);
+  setTimeout(clean, 600);
+  setTimeout(clean, 1500);
+})();
 </script>
 
 </body>
