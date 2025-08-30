@@ -2,12 +2,6 @@
 <!-- Created with iSpring --><!-- 744 676 --><!--version 11.11.9.27025 --><!--type html --><!--mainFolder  --><!--content quiz -->
 <html>
 <head>
-
-<style>
-/* Hide the duplicate layer if it still renders twice */
-img[src*="img-3962cd7638e493b5_3f7549bf9d7ce.png"] { display: none !important; }
-</style>
-
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<script src="data/browsersupport.js"></script>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
@@ -86,19 +80,22 @@ img {
 
 
 <style>
-/* Keep ONLY the chosen statement image; hide all other PNGs the player may load */
+/* Keep ONLY the chosen statement image; hide all other PNG layers */
 img[src*=".png"][src*="img-"]:not([src*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) {
   display: none !important;
 }
-
-/* If any are applied as background-images */
 [style*="background-image"][style*="img-"]:not([style*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) {
   display: none !important;
 }
-
-/* If picture/source tags are used */
 picture source[srcset*="img-"]:not([srcset*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) {
   display: none !important;
+}
+
+/* Try to neutralize transforms that could cause subpixel doubling */
+img[src*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"] {
+  transform: none !important;
+  image-rendering: auto !important;
+  -ms-interpolation-mode: bicubic;
 }
 </style>
 
@@ -118,5 +115,38 @@ picture source[srcset*="img-"]:not([srcset*="img-f7756609d2f7c73025a4396d9c8017b
 		});
 		});
 	</script>
+
+<script>
+// After everything loads, keep only one copy of the keeper image even if it appears multiple times.
+window.addEventListener('load', () => {
+  const KEEP = 'img-f7756609d2f7c73025a4396d9c8017b570214bb9.png';
+
+  // Hide all non-keeper <img> layers
+  document.querySelectorAll('img[src*="img-"]').forEach(img => {
+    const s = img.getAttribute('src') || '';
+    if (!s.includes(KEEP)) img.style.display = 'none';
+  });
+
+  // If multiple keeper images exist, hide duplicates and keep only the first
+  const keepers = Array.from(document.querySelectorAll(`img[src*="${KEEP}"]`));
+  keepers.slice(1).forEach(el => el.style.display = 'none');
+
+  // Hide any background-image layers that aren't the keeper
+  const els = Array.from(document.querySelectorAll('[style*="background-image"]'));
+  let keeperBgKept = false;
+  els.forEach(el => {
+    const styleAttr = el.getAttribute('style') || '';
+    const comp = getComputedStyle(el).backgroundImage || '';
+    const bg = styleAttr + ' ' + comp;
+    if (bg.includes('img-') && !bg.includes(KEEP)) {
+      el.style.display = 'none';
+    } else if (bg.includes(KEEP)) {
+      if (keeperBgKept) el.style.display = 'none';
+      keeperBgKept = true;
+    }
+  });
+});
+</script>
+
 </body>
 </html>
