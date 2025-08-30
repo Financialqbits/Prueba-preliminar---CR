@@ -84,6 +84,24 @@ img {
 }
 </style>
 
+
+<style>
+/* Keep ONLY the chosen statement image; hide all other PNGs the player may load */
+img[src*=".png"][src*="img-"]:not([src*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) {
+  display: none !important;
+}
+
+/* If any are applied as background-images */
+[style*="background-image"][style*="img-"]:not([style*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) {
+  display: none !important;
+}
+
+/* If picture/source tags are used */
+picture source[srcset*="img-"]:not([srcset*="img-f7756609d2f7c73025a4396d9c8017b570214bb9.png"]) {
+  display: none !important;
+}
+</style>
+
 </head>
 <body>
 	<div id="preloader"></div>
