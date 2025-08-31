@@ -18,6 +18,9 @@
 
 
 
+
+
+
 <style>
 /* Always preserve aspect ratio */
 img {
@@ -29,8 +32,8 @@ img {
   image-rendering: auto !important;
 }
 
-/* SHOW ONLY the new statements image and hide any other auto-generated layers */
-img[src*="data/images/"]:not([src$="img-3962cd7638e493b5_3f7549bf9d7ce.png"]) { 
+/* SHOW ONLY the new statements image; hide any other auto-generated bitmaps */
+img[src*="/data/images/"]:not([src$="img-3962cd7638e493b5_3f7549bf9d7ce.png"]) {
   display: none !important;
 }
 [style*="background-image"][style*="/data/images/"]:not([style*="img-3962cd7638e493b5_3f7549bf9d7ce.png"]) {
@@ -40,13 +43,7 @@ picture source[srcset*="/data/images/"]:not([srcset*="img-3962cd7638e493b5_3f754
   display: none !important;
 }
 
-/* iSpring sometimes paints overlays on <canvas>/<svg>—hide them to prevent doubles */
-.ispring-content canvas,
-.ispring-slide canvas,
-.ispring-content svg,
-.ispring-slide svg {
-  display: none !important;
-}
+/* IMPORTANT: do NOT hide iSpring's canvas/SVG layers */
 </style>
 
 </head>
