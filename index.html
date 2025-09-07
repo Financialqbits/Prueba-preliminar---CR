@@ -82,6 +82,55 @@
 }
 </style>
 
+
+<style>
+/* --- iSpring Quiz: load packaged fonts with cache-busting --- */
+@font-face {
+  font-family: "FQFont0";
+  src: url("data/fonts/fnt0.woff?v=2") format("woff");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "FQFont1";
+  src: url("data/fonts/fnt1.woff?v=2") format("woff");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "FQFont2";
+  src: url("data/fonts/fnt2.woff?v=2") format("woff");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "FQFont3";
+  src: url("data/fonts/fnt3.woff?v=2") format("woff");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "FQFont4";
+  src: url("data/fonts/fnt4.woff?v=2") format("woff");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "FQFont5";
+  src: url("data/fonts/fnt5.woff?v=2") format("woff");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+
+/* Apply fonts to iSpring containers */
+:is(html, body,
+.ispring-player, .ispring-content, .ispring-slide,
+.ispring-text, .ispring-question, .ispring-answer,
+.ispring-title, .ispring-caption, .ispring-note) {
+  font-family: "FQFont0","FQFont1","FQFont2","FQFont3","FQFont4","FQFont5",
+               -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, Helvetica, sans-serif !important;
+  letter-spacing: normal !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+.ispring-text { line-height: 1.25 !important; }
+</style>
+
 </head>
 <body>
 	<div id="preloader"></div>
