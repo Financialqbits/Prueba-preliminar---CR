@@ -49,30 +49,35 @@
 		@-webkit-keyframes preloader_spin { 0% {-webkit-transform: rotate(0deg);} 100% {-webkit-transform: rotate(360deg);}}
     </style>
 
-<!-- === Minimal webfont fix for GitHub Pages (safe) === -->
-<style>
-@font-face { font-family: "FQFont0"; src: url("data/fonts/fnt0.woff") format("woff"); font-display: swap; }
-@font-face { font-family: "FQFont1"; src: url("data/fonts/fnt1.woff") format("woff"); font-display: swap; }
-@font-face { font-family: "FQFont2"; src: url("data/fonts/fnt2.woff") format("woff"); font-display: swap; }
-@font-face { font-family: "FQFont3"; src: url("data/fonts/fnt3.woff") format("woff"); font-display: swap; }
-@font-face { font-family: "FQFont4"; src: url("data/fonts/fnt4.woff") format("woff"); font-display: swap; }
-@font-face { font-family: "FQFont5"; src: url("data/fonts/fnt5.woff") format("woff"); font-display: swap; }
-
-/* Apply the stack to iSpring containers only */
-.ispring-player, .ispring-content, .ispring-slide, #content,
-.ispring-player *, .ispring-content *, .ispring-slide *, #content * {
-  font-family: "FQFont0","FQFont1","FQFont2","FQFont3","FQFont4","FQFont5",
-               -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, Helvetica, sans-serif !important;
+<style id="font-fix">
+/* --- iSpring text rendering fixes (hard-coded) --- */
+/* Improve readability, disable weird ligatures, and normalize kerning */
+html, body, .ispring-player, .ispring-content {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-kerning: normal;
 }
 
-/* Keep images responsive without touching canvas/svg */
-img { max-width: 100%; height: auto !important; object-fit: contain !important; image-rendering: auto !important; }
-</style>
-<!-- === /Minimal webfont fix === -->
+/* Map iSpring’s generated font tokens to clean web-safe faces */
+[class^="fnt"], [class*=" fnt"], .ispring-text, .ispring-caption, .ispring-slide * {
+  font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  letter-spacing: 0 !important;
+  font-variant-ligatures: normal !important; /* avoid odd ligatures */
+  font-feature-settings: "liga" 1, "kern" 1;
+}
 
+/* Weight hints (best-effort) */
+[class*="fnt0"], [class*="fnt2"], [class*="fnt4"] { font-weight: 400 !important; }
+[class*="fnt1"] { font-weight: 600 !important; }
+[class*="fnt3"], [class*="fnt5"] { font-weight: 700 !important; }
+
+/* Don’t let text be force-scaled oddly */
+.ispring-slide, .ispring-content, .ispring-player {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+</style>
 </head>
 <body>
 	<div id="preloader"></div>
