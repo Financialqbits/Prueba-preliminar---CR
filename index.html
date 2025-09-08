@@ -1,71 +1,6 @@
 <!DOCTYPE html>
 <!-- Created with iSpring --><!-- 744 676 --><!--version 11.8.0.36 --><!--type html --><!--mainFolder  --><!--content quiz -->
 <html>
-
-<style>
-/* 1) Use the same clean web-font stack everywhere */
-:is(.ispring-content, .ispring-player, body) {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif !important;
-  font-synthesis-weight: none !important;          /* prevents fake bold */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* 2) Normalize all quiz text to regular weight */
-.ispring-content :is(p, span, div, li, dd, dt, label) {
-  font-weight: 400 !important;
-  font-variation-settings: "wght" 400 !important;   /* if variable font is used */
-  letter-spacing: normal !important;
-  text-shadow: none !important;
-}
-
-/* 3) Keep true bold only for obvious headings/buttons */
-.ispring-content :is(h1,h2,h3,.quiz-title,.question-title,.btn,.button,.ispring-button) {
-  font-weight: 700 !important;
-}
-
-/* 4) iSpring often assigns numeric classes (fnt0…fnt5). Map them explicitly. */
-.fnt0,.fnt1,.fnt2,.fnt3,.fnt4,.fnt5 {
-  font-weight: 400 !important;  /* default all to regular */
-}
-.fnt-bold,.fnt700 { font-weight: 700 !important; } /* safety if bold classes appear */
-
-/* 5) Kill any “auto bold” coming from <b>/<strong> the engine injects */
-.ispring-content b,
-.ispring-content strong { font-weight: 600 !important; }  /* slightly bold, not heavy */
-
-/* 6) Fix buttons if they look too heavy */
-.ispring-content .button,
-.ispring-content .btn { font-weight: 600 !important; }
-</style>
-
-<style>
-/* Force override of iSpring font variables */
-:root {
-  --font-family-normal: "Open Sans", Arial, Helvetica, sans-serif !important;
-  --font-family-bold: "Open Sans", Arial, Helvetica, sans-serif !important;
-  --font-weight-normal: 400 !important;
-  --font-weight-bold: 600 !important;   /* true bold, but not super heavy */
-  --font-variation-settings-normal: "wght" 400 !important;
-  --font-variation-settings-bold: "wght" 600 !important;
-}
-
-/* Apply consistent font to all text */
-body, .ispring-content, .ispring-player, .ispring-slide {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif !important;
-  font-weight: 400 !important;
-  font-synthesis-weight: none !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Only allow bold where explicitly marked */
-b, strong, h1, h2, h3, .quiz-title, .question-title {
-  font-weight: 600 !important;
-}
-</style>
-
-
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<script src="data/browsersupport.js"></script>
@@ -114,56 +49,17 @@ b, strong, h1, h2, h3, .quiz-title, .question-title {
 		@-webkit-keyframes preloader_spin { 0% {-webkit-transform: rotate(0deg);} 100% {-webkit-transform: rotate(360deg);}}
     </style>
 
-<style id="font-fix">
-/* --- iSpring text rendering fixes (hard-coded) --- */
-/* Improve readability, disable weird ligatures, and normalize kerning */
-html, body, .ispring-player, .ispring-content {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  font-kerning: normal;
+<style>
+/* Force normal text to render with correct weight */
+body, p, span, div {
+  font-weight: normal !important;
+  font-family: 'qPFn', sans-serif !important;
 }
 
-/* Map iSpring’s generated font tokens to clean web-safe faces */
-[class^="fnt"], [class*=" fnt"], .ispring-text, .ispring-caption, .ispring-slide * {
-  font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif !important;
-  letter-spacing: 0 !important;
-  font-variant-ligatures: normal !important; /* avoid odd ligatures */
-  font-feature-settings: "liga" 1, "kern" 1;
-}
-
-/* Weight hints (best-effort) */
-[class*="fnt0"], [class*="fnt2"], [class*="fnt4"] { font-weight: 400 !important; }
-[class*="fnt1"] { font-weight: 600 !important; }
-[class*="fnt3"], [class*="fnt5"] { font-weight: 700 !important; }
-
-/* Don’t let text be force-scaled oddly */
-.ispring-slide, .ispring-content, .ispring-player {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-</style>
-
-<style id="ispring-font-override">
-:root {
-  --font-family-normal: "Open Sans", Arial, Helvetica, sans-serif !important;
-  --font-family-bold: "Open Sans", Arial, Helvetica, sans-serif !important;
-  --font-weight-normal: 400 !important;
-  --font-weight-bold: 600 !important;
-  --font-variation-settings-normal: "wght" 400 !important;
-  --font-variation-settings-bold: "wght" 600 !important;
-}
-
-body, .ispring-content, .ispring-player, .ispring-slide {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif !important;
-  font-weight: 400 !important;
-  font-synthesis-weight: none !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-b, strong, h1, h2, h3, .quiz-title, .question-title {
-  font-weight: 600 !important;
+/* Explicit bold only when marked */
+strong, b {
+  font-weight: 700 !important;
+  font-family: 'qPFnb', sans-serif !important;
 }
 </style>
 
