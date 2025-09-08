@@ -1,6 +1,45 @@
 <!DOCTYPE html>
 <!-- Created with iSpring --><!-- 744 676 --><!--version 11.8.0.36 --><!--type html --><!--mainFolder  --><!--content quiz -->
 <html>
+
+<style>
+/* 1) Use the same clean web-font stack everywhere */
+:is(.ispring-content, .ispring-player, body) {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif !important;
+  font-synthesis-weight: none !important;          /* prevents fake bold */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2) Normalize all quiz text to regular weight */
+.ispring-content :is(p, span, div, li, dd, dt, label) {
+  font-weight: 400 !important;
+  font-variation-settings: "wght" 400 !important;   /* if variable font is used */
+  letter-spacing: normal !important;
+  text-shadow: none !important;
+}
+
+/* 3) Keep true bold only for obvious headings/buttons */
+.ispring-content :is(h1,h2,h3,.quiz-title,.question-title,.btn,.button,.ispring-button) {
+  font-weight: 700 !important;
+}
+
+/* 4) iSpring often assigns numeric classes (fnt0…fnt5). Map them explicitly. */
+.fnt0,.fnt1,.fnt2,.fnt3,.fnt4,.fnt5 {
+  font-weight: 400 !important;  /* default all to regular */
+}
+.fnt-bold,.fnt700 { font-weight: 700 !important; } /* safety if bold classes appear */
+
+/* 5) Kill any “auto bold” coming from <b>/<strong> the engine injects */
+.ispring-content b,
+.ispring-content strong { font-weight: 600 !important; }  /* slightly bold, not heavy */
+
+/* 6) Fix buttons if they look too heavy */
+.ispring-content .button,
+.ispring-content .btn { font-weight: 600 !important; }
+</style>
+
+
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<script src="data/browsersupport.js"></script>
