@@ -143,6 +143,30 @@ html, body, .ispring-player, .ispring-content {
   text-size-adjust: 100%;
 }
 </style>
+
+<style id="ispring-font-override">
+:root {
+  --font-family-normal: "Open Sans", Arial, Helvetica, sans-serif !important;
+  --font-family-bold: "Open Sans", Arial, Helvetica, sans-serif !important;
+  --font-weight-normal: 400 !important;
+  --font-weight-bold: 600 !important;
+  --font-variation-settings-normal: "wght" 400 !important;
+  --font-variation-settings-bold: "wght" 600 !important;
+}
+
+body, .ispring-content, .ispring-player, .ispring-slide {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif !important;
+  font-weight: 400 !important;
+  font-synthesis-weight: none !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+b, strong, h1, h2, h3, .quiz-title, .question-title {
+  font-weight: 600 !important;
+}
+</style>
+
 </head>
 <body>
 	<div id="preloader"></div>
