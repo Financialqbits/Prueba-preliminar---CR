@@ -1,62 +1,25 @@
 
-<!-- === Qbit webfont fix for GitHub Pages === -->
-<link rel="preload" href="data/fonts/fnt0.woff?v=3" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="data/fonts/fnt1.woff?v=3" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="data/fonts/fnt2.woff?v=3" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="data/fonts/fnt3.woff?v=3" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="data/fonts/fnt4.woff?v=3" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="data/fonts/fnt5.woff?v=3" as="font" type="font/woff" crossorigin>
-
 <style>
-  @font-face {
-    font-family: "QbitUI-0";
-    src: url("data/fonts/fnt0.woff?v=3") format("woff");
-    font-weight: 400; font-style: normal; font-display: swap;
-  }
-  @font-face {
-    font-family: "QbitUI-1";
-    src: url("data/fonts/fnt1.woff?v=3") format("woff");
-    font-weight: 500; font-style: normal; font-display: swap;
-  }
-  @font-face {
-    font-family: "QbitUI-2";
-    src: url("data/fonts/fnt2.woff?v=3") format("woff");
-    font-weight: 600; font-style: normal; font-display: swap;
-  }
-  @font-face {
-    font-family: "QbitUI-3";
-    src: url("data/fonts/fnt3.woff?v=3") format("woff");
-    font-weight: 700; font-style: normal; font-display: swap;
-  }
-  @font-face {
-    font-family: "QbitUI-4";
-    src: url("data/fonts/fnt4.woff?v=3") format("woff");
-    font-weight: 400; font-style: italic; font-display: swap;
-  }
-  @font-face {
-    font-family: "QbitUI-5";
-    src: url("data/fonts/fnt5.woff?v=3") format("woff");
-    font-weight: 700; font-style: italic; font-display: swap;
-  }
+@font-face { font-family: "FQFont0"; src: url("data/fonts/fnt0.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "FQFont1"; src: url("data/fonts/fnt1.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "FQFont2"; src: url("data/fonts/fnt2.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "FQFont3"; src: url("data/fonts/fnt3.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "FQFont4"; src: url("data/fonts/fnt4.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "FQFont5"; src: url("data/fonts/fnt5.woff") format("woff"); font-display: swap; }
 
-  :root {
-    --qbit-stack: "QbitUI-0","QbitUI-1","QbitUI-2","QbitUI-3","QbitUI-4","QbitUI-5",
-                  -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",
-                  Arial,"Noto Sans","Liberation Sans",sans-serif;
-  }
+/* Apply only to iSpring containers and their descendants */
+.ispring-player, .ispring-content, .ispring-slide, #content,
+.ispring-player *, .ispring-content *, .ispring-slide *, #content * {
+  font-family: "FQFont0","FQFont1","FQFont2","FQFont3","FQFont4","FQFont5",
+               -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, Helvetica, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
 
-  html, body,
-  .ispring-player, .ispring-player *,
-  .ispring-content, .ispring-content *,
-  .ispring-slide, .ispring-slide *,
-  #content, #content * {
-    font-family: var(--qbit-stack) !important;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
+/* Keep images responsive without touching canvas/svg */
+img { max-width: 100%; height: auto !important; object-fit: contain !important; image-rendering: auto !important; }
 </style>
-<!-- === /Qbit webfont fix === -->
 <!DOCTYPE html>
 
 <html>
