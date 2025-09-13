@@ -48,6 +48,87 @@
 		@keyframes preloader_spin { 0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);} }
 		@-webkit-keyframes preloader_spin { 0% {-webkit-transform: rotate(0deg);} 100% {-webkit-transform: rotate(360deg);}}
     </style>
+
+<!-- Mask duplicated "Total" text drawn by iSpring on the canvas -->
+<style>
+  .fq-mask {
+    position: fixed;               /* follow the canvas on screen */
+    background: #ffffff;           /* white mask; tweak if your bg differs */
+    border-radius: 2px;
+    pointer-events: none;          /* never block clicks (e.g., the button) */
+    z-index: 2147483000;           /* over the player */
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.02); /* feather edge a bit */
+  }
+</style>
+<script>
+(function () {
+  // Tune these if needed (percentages of the visible canvas box)
+  // left "Total 17,750.00" box:
+  const L = { x: 0.235, y: 0.735, w: 0.19, h: 0.065 };
+  // right "Total 3,800.00" box:
+  const R = { x: 0.695, y: 0.735, w: 0.20, h: 0.065 };
+
+  // Create (or reuse) overlay elements
+  const leftMask  = document.createElement('div');
+  const rightMask = document.createElement('div');
+  leftMask.className  = 'fq-mask';
+  rightMask.className = 'fq-mask';
+  document.body.append(leftMask, rightMask);
+
+  // Finds the iSpring canvas (works across iSpring player builds)
+  function findCanvas() {
+    // most players keep a single visible canvas inside the content area
+    // prefer the biggest canvas on the page
+    const canvases = Array.from(document.querySelectorAll('canvas'));
+    if (!canvases.length) return null;
+    return canvases.reduce((a, b) => (a.width * a.height > b.width * b.height ? a : b));
+  }
+
+  // Position masks relative to canvas client box
+  function placeMasks() {
+    const c = findCanvas();
+    if (!c) return;
+
+    const r = c.getBoundingClientRect();
+    // helper to place one mask by percentages
+    const place = (el, box) => {
+      el.style.left   = (r.left + r.width  * box.x) + 'px';
+      el.style.top    = (r.top  + r.height * box.y) + 'px';
+      el.style.width  = (r.width  * box.w) + 'px';
+      el.style.height = (r.height * box.h) + 'px';
+    };
+    place(leftMask,  L);
+    place(rightMask, R);
+  }
+
+  // Keep masks correct as the player scales / reflows
+  const ro = new ResizeObserver(placeMasks);
+  const mo = new MutationObserver(placeMasks);
+  window.addEventListener('resize', placeMasks, { passive: true });
+  window.addEventListener('orientationchange', placeMasks, { passive: true });
+
+  function bootstrap() {
+    const c = findCanvas();
+    if (c) {
+      // watch canvas and its container for size/DOM changes
+      ro.observe(c);
+      mo.observe(document.body, { childList: true, subtree: true });
+      placeMasks();
+    } else {
+      // try again until player is fully loaded
+      setTimeout(bootstrap, 200);
+    }
+  }
+  // run once DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrap);
+  } else {
+    bootstrap();
+  }
+})();
+</script>
+
+
 </head>
 <body>
 	<div id="preloader"></div>
