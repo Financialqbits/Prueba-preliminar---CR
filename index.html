@@ -2,129 +2,6 @@
 <!-- Created with iSpring --><!-- 744 676 --><!--version 11.8.0.36 --><!--type html --><!--mainFolder  --><!--content quiz -->
 <html>
 <head>
-
-<!-- Correct preload with matching paths -->
-<link rel="preload" as="font" type="font/woff" href="data/fonts/fnt0.woff?v=7" crossorigin>
-<link rel="preload" as="font" type="font/woff" href="data/fonts/fnt1.woff?v=7" crossorigin>
-
-<style>
-/* Map iSpring's "normal" and "bold" fonts consistently */
-
-/* Regular */
-@font-face {
-  font-family: "QuizFont";
-  src: url("data/fonts/fnt0.woff?v=7") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Bold */
-@font-face {
-  font-family: "QuizFont";
-  src: url("data/fonts/fnt1.woff?v=7") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Override iSpring’s injected variables */
-:root, body {
-  --font-family-normal: "QuizFont" !important;
-  --font-family-bold: "QuizFont" !important;
-  --font-weight-normal: 400 !important;
-  --font-weight-bold: 700 !important;
-}
-
-/* Force base text regular */
-body, #content, .ispring-content, .ispring-slide {
-  font-family: "QuizFont", Arial, sans-serif !important;
-  font-weight: 400 !important;
-}
-
-/* Allow bold elements */
-b, strong, h1, h2, h3, .quiz-title, .question-title,
-[style*="font-weight:700"], [style*="font-weight:bold"] {
-  font-family: "QuizFont" !important;
-  font-weight: 700 !important;
-}
-</style>
-
-
-<!-- Font sanity override: map iSpring fonts to a clean regular/bold pair -->
-<link rel="preload" as="font" type="font/woff" href="data/fonts/fnt0.woff?v=7" crossorigin>
-<link rel="preload" as="font" type="font/woff" href="data/fonts/fnt1.woff?v=7" crossorigin>
-
-<style>
-/* 1) Define a clean, two-weight family and use cache-busting (?v=7) */
-@font-face {
-  font-family: "QuizFont";
-  src: url("data/fonts/fnt0.woff?v=7") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "QuizFont";
-  src: url("data/fonts/fnt1.woff?v=7") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* 2) Also alias the iSpring families to the same files so their CSS vars can't trick us */
-@font-face {
-  font-family: qPFn; /* iSpring "normal" */
-  src: url("data/fonts/fnt0.woff?v=7") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: qPFnb; /* iSpring "bold" */
-  src: url("data/fonts/fnt1.woff?v=7") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* 3) Force the variables iSpring sets to point to our family */
-:root, body, #content, .ispring-content, .ispring-slide {
-  --font-family-normal: "QuizFont" !important;
-  --font-family-bold:   "QuizFont" !important;
-  --font-weight-normal: 400 !important;
-  --font-weight-bold:   700 !important;
-  --font-variation-settings-normal: normal !important;
-  --font-variation-settings-bold:   normal !important;
-}
-
-/* 4) Make everything default to the regular cut */
-body, #content, .ispring-content, .ispring-slide, [style*="--font-family-normal"] {
-  font-family: "QuizFont", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif !important;
-  font-weight: 400 !important;
-  font-variation-settings: normal !important;
-}
-
-/* 5) Only these should be bold — add your quiz title classes if you have them */
-b, strong, h1, h2, h3, .quiz-title, .question-title,
-[style*="font-weight:700"], [style*="font-weight:bold"] {
-  font-family: "QuizFont" !important;
-  font-weight: 700 !important;
-  font-variation-settings: normal !important;
-}
-
-/* 6) Belt-and-suspenders: if iSpring tries to inject its families directly, keep them regular unless explicitly bold */
-*[style*="font-family:qPFn"], *[style*="font-family: qPFn"] {
-  font-family: "QuizFont" !important;
-  font-weight: 400 !important;
-}
-*[style*="font-family:qPFnb"], *[style*="font-family: qPFnb"] {
-  font-family: "QuizFont" !important;
-  font-weight: 700 !important;
-}
-</style>
-
-
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<script src="data/browsersupport.js"></script>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
@@ -172,155 +49,35 @@ b, strong, h1, h2, h3, .quiz-title, .question-title,
 		@-webkit-keyframes preloader_spin { 0% {-webkit-transform: rotate(0deg);} 100% {-webkit-transform: rotate(360deg);}}
     </style>
 
-<style>
-/* Force normal text to render with correct weight */
-body, p, span, div {
-  font-weight: normal !important;
-  font-family: 'qPFn', sans-serif !important;
-}
-
-/* Explicit bold only when marked */
-strong, b {
-  font-weight: 700 !important;
-  font-family: 'qPFnb', sans-serif !important;
-}
-</style>
-
-
-<!-- Qbits font normalization (safe inject) -->
-<style id="qbits-font-fix">
-@font-face { font-family: 'qPFn';  src: url('data/fonts/fnt0.woff?v=6') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'qPFnb'; src: url('data/fonts/fnt1.woff?v=6') format('woff'); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: 'qPF2';  src: url('data/fonts/fnt2.woff?v=6') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'qPF3';  src: url('data/fonts/fnt3.woff?v=6') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'qPF4';  src: url('data/fonts/fnt4.woff?v=6') format('woff'); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: 'qPF5';  src: url('data/fonts/fnt5.woff?v=6') format('woff'); font-weight: 700; font-style: italic; font-display: swap; }
-
-:root, body {
-  --font-family-normal: 'qPFn', Arial, Helvetica, sans-serif !important;
-  --font-family-bold:   'qPFnb', Arial, Helvetica, sans-serif !important;
-  --font-weight-normal: 400 !important;
-  --font-weight-bold:   600 !important;
-  --font-variation-settings-normal: "wght" 400 !important;
-  --font-variation-settings-bold:   "wght" 600 !important;
-}
-
-body, .ispring-player, .ispring-content, .ispring-slide, #content,
-body *, .ispring-player *, .ispring-content *, .ispring-slide *, #content * {
-  font-family: var(--font-family-normal) !important;
-  font-weight: var(--font-weight-normal) !important;
-  font-synthesis-weight: none !important;
+<style id="font-fix">
+/* --- iSpring text rendering fixes (hard-coded) --- */
+/* Improve readability, disable weird ligatures, and normalize kerning */
+html, body, .ispring-player, .ispring-content {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  letter-spacing: normal !important;
+  font-kerning: normal;
 }
 
-b, strong, .quiz-title, .question-title, h1, h2, h3 {
-  font-family: var(--font-family-bold) !important;
-  font-weight: var(--font-weight-bold) !important;
+/* Map iSpring’s generated font tokens to clean web-safe faces */
+[class^="fnt"], [class*=" fnt"], .ispring-text, .ispring-caption, .ispring-slide * {
+  font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  letter-spacing: 0 !important;
+  font-variant-ligatures: normal !important; /* avoid odd ligatures */
+  font-feature-settings: "liga" 1, "kern" 1;
 }
 
-[style*="--font-family-bold"], [style*="--font-weight-bold"] {
-  font-family: var(--font-family-normal) !important;
-  font-weight: var(--font-weight-normal) !important;
-}
+/* Weight hints (best-effort) */
+[class*="fnt0"], [class*="fnt2"], [class*="fnt4"] { font-weight: 400 !important; }
+[class*="fnt1"] { font-weight: 600 !important; }
+[class*="fnt3"], [class*="fnt5"] { font-weight: 700 !important; }
 
-img { max-width: 100%; height: auto !important; object-fit: contain !important; image-rendering: auto !important; }
-</style>
-
-<!-- Force clean font usage -->
-<style id="quiz-font-override">
-@font-face {
-  font-family: 'QuizFont';
-  src: url('data/fonts/fnt0.woff?v=7') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'QuizFont';
-  src: url('data/fonts/fnt1.woff?v=7') format('woff');
-  font-weight: bold;
-  font-style: normal;
-}
-
-/* Apply globally */
-body, .ispring-content, .ispring-slide, * {
-  font-family: 'QuizFont', sans-serif !important;
-  font-weight: normal !important;
-}
-
-/* Allow bold only when explicitly marked */
-b, strong {
-  font-weight: bold !important;
+/* Don’t let text be force-scaled oddly */
+.ispring-slide, .ispring-content, .ispring-player {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 </style>
-
-<style>
-  /* 1) Stop the browser from faking bold/italic when a cut is missing */
-  html, body {
-    font-synthesis-weight: none;
-    font-synthesis-style: none;
-  }
-
-  /* 2) Declare the two cuts the quiz uses (regular + bold) */
-  /*    If you keep iSpring’s fonts (fnt0/fnt1), leave these paths as-is. */
-  @font-face {
-    font-family: "QuizFont";
-    src: url("data/fonts/fnt0.woff?v=8") format("woff");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "QuizFont";
-    src: url("data/fonts/fnt1.woff?v=8") format("woff");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  /* 3) Provide a safe default while the player initializes */
-  body, #content, .ispring-content, .ispring-slide {
-    font-family: "QuizFont", Arial, Helvetica, sans-serif;
-    font-weight: 400;
-  }
-  b, strong, h1, h2, h3 {
-    font-weight: 700;
-  }
-</style>
-
-<script>
-  // 4) After the player has attached, overwrite the runtime CSS variables it injects.
-  //    Keep re-applying if the player flips them again.
-  (function enforceFonts() {
-    const apply = () => {
-      document.body.style.setProperty('--font-family-normal', '"QuizFont"');
-      document.body.style.setProperty('--font-family-bold',   '"QuizFont"');
-      document.body.style.setProperty('--font-weight-normal', '400');
-      document.body.style.setProperty('--font-weight-bold',   '700');
-      document.body.style.setProperty('--font-variation-settings-normal', 'normal');
-      document.body.style.setProperty('--font-variation-settings-bold',   'normal');
-    };
-
-    // Apply once as soon as possible…
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', apply, { once: true });
-    } else {
-      apply();
-    }
-
-    // …apply again after the player finishes mounting (on window load).
-    window.addEventListener('load', () => {
-      apply();
-      // Watch for the player mutating the <body> style and re-apply if needed.
-      const mo = new MutationObserver(() => apply());
-      mo.observe(document.body, { attributes: true, attributeFilter: ['style'] });
-    });
-  })();
-</script>
-
-
 </head>
 <body>
 	<div id="preloader"></div>
