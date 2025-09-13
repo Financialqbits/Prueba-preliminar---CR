@@ -255,6 +255,72 @@ b, strong {
   font-weight: bold !important;
 }
 </style>
+
+<style>
+  /* 1) Stop the browser from faking bold/italic when a cut is missing */
+  html, body {
+    font-synthesis-weight: none;
+    font-synthesis-style: none;
+  }
+
+  /* 2) Declare the two cuts the quiz uses (regular + bold) */
+  /*    If you keep iSpring’s fonts (fnt0/fnt1), leave these paths as-is. */
+  @font-face {
+    font-family: "QuizFont";
+    src: url("data/fonts/fnt0.woff?v=8") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "QuizFont";
+    src: url("data/fonts/fnt1.woff?v=8") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* 3) Provide a safe default while the player initializes */
+  body, #content, .ispring-content, .ispring-slide {
+    font-family: "QuizFont", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+  }
+  b, strong, h1, h2, h3 {
+    font-weight: 700;
+  }
+</style>
+
+<script>
+  // 4) After the player has attached, overwrite the runtime CSS variables it injects.
+  //    Keep re-applying if the player flips them again.
+  (function enforceFonts() {
+    const apply = () => {
+      document.body.style.setProperty('--font-family-normal', '"QuizFont"');
+      document.body.style.setProperty('--font-family-bold',   '"QuizFont"');
+      document.body.style.setProperty('--font-weight-normal', '400');
+      document.body.style.setProperty('--font-weight-bold',   '700');
+      document.body.style.setProperty('--font-variation-settings-normal', 'normal');
+      document.body.style.setProperty('--font-variation-settings-bold',   'normal');
+    };
+
+    // Apply once as soon as possible…
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', apply, { once: true });
+    } else {
+      apply();
+    }
+
+    // …apply again after the player finishes mounting (on window load).
+    window.addEventListener('load', () => {
+      apply();
+      // Watch for the player mutating the <body> style and re-apply if needed.
+      const mo = new MutationObserver(() => apply());
+      mo.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+    });
+  })();
+</script>
+
+
 </head>
 <body>
 	<div id="preloader"></div>
