@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://[Financialqbits].github.io/qbits-pretest-v2",
+  "homepage": "https://financialqbits.github.io/Prueba-preliminar---CR/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
